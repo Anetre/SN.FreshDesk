@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="" >
+
+  <!-- Projects to Build -->
+  <ItemGroup>
+    <InstallerProjectFiles Include="$(FreshDeskDir)\MonitorAgent\BizTalk\IM.MonitorAgent.BizTalk.Installer.sln" />
+  </ItemGroup>
+
+  <Target Name="CompileInstall" DependsOnTargets="SetAssemblyVersion">
+    <Message Text ="----------------------------------------------------------------------------------
+Start building of Monitor Agent - BizTalk Installer...
+builtdir: $(builtdir)
+FreshDeskVersion: $(FreshDeskVersion)
+-----------------------------------------------------------------------------------"/>
+    <MakeDir Directories="$(builtdir)" Condition="!Exists('$(builtdir)')" />
+    <MSBuild Projects="@(InstallerProjectFiles)" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform);OutputPath=$(builtdir);SkipUnchangedFiles=false;FreshDeskVersion=$(FreshDeskVersion);FreshDeskDir=$(FreshDeskDir);builtdir=$(builtdir)"  />
+  </Target>
+
+  <Target Name="BuildInstalll" BeforeTargets="Init">
+    <CallTarget Targets="CompileInstall" />
+    <CallTarget Targets="PostBuildInstallCopy" />
+  </Target>
+
+  <ItemGroup>
+    <!--<CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;C:\Projects\IS\Products\Integration Manager\&quot;,&quot;bin-Re&quot;, SearchOption.AllDirectories))" />
+    <CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;C:\Projects\IS\Products\Integration Manager\&quot;,&quot;bin-De&quot;, SearchOption.AllDirectories))" />
+    <CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;C:\Projects\IS\Libraries\&quot;,&quot;bin-De&quot;, SearchOption.AllDirectories))" />
+    <CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;C:\Projects\IS\Libraries\&quot;,&quot;bin-Re&quot;, SearchOption.AllDirectories))" />-->
+  </ItemGroup>
+
+  <Target Name="CleanInstalll" DependsOnTargets="SetAssemblyVersion">
+    <!--<Message Text="Folders to clean: @(CleanFolders, ' , ')" />
+    <Message Text="Folders to clean: C:\Projects\Integration Manager\BuildUpdate\$(FreshDeskVersion)" />
+    <Message Text="Folders to clean: C:\Projects\Integration Manager\Zip\$(FreshDeskVersion)" />
+    <RemoveDir Directories="@(CleanFolders)" />
+    <RemoveDir Directories="C:\Projects\Integration Manager\BuildUpdate\$(FreshDeskVersion)" />
+    <RemoveDir Directories="C:\Projects\Integration Manager\Zip\$(FreshDeskVersion)" />-->
+  </Target>
+
+  <Target Name="InstallerBuild" DependsOnTargets="CleanInstalll;BuildInstalll" />
+
+
+  <Target Name="PostBuildInstallCopy">
+    <ItemGroup>
+      <InstallerFilesToCopy Include="C:\Projects\IS\Products\IM\MonitorAgent\BizTalk\IM.MonitorAgent.BizTalkInstaller\$(builtdir)\**\*" />
+    </ItemGroup>
+
+    <Message Text="
+-----------------------
+Start Post Installer
+-----------------------" />
+    <!-- Create status services directory -->
+    <MakeDir Directories = "C:\Projects\Integration Manager\Installers\Monitor Agents" Condition = "!Exists('C:\Projects\Integration Manager\Installers\Monitor Agents')" />
+
+    <!-- Copy compield fiels to correct outputfolder for installation -->
+    <Copy SourceFiles="@(InstallerFilesToCopy)" DestinationFolder="C:\Projects\Integration Manager\Installers\Monitor Agents\%(RecursiveDir)" />
+
+  </Target>
+</Project>
+

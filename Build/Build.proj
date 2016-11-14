@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Rebuild;PostBuild">
+  <!--PreBuild;Build;UnitTest;PostBuild;Deploy;PostDeploy;Test;HtmlDoc_Create" >-->
+  <!-- PropertyGroup: Set global values, unique per solution -->
+  <!-- TO BUILD SPECIFIC /v:d /p:FreshDeskVersion=4.1.0.10 /t:Rebuild-->
+  <PropertyGroup>
+    <!-- use /p:DeployTarget1=PROD for production, Test, Development, BuildServer -->
+    <DeployDir>C:\Projects\GitHub\Build\SN.FreshDesk</DeployDir>
+    <DeployTarget1>PROD</DeployTarget1>
+    <FreshDeskDir>C:\Projects\GitHub\Anetre\SN.FreshDesk</FreshDeskDir>
+    <SolutionPath>$(FreshDeskDir)\SN.FreshDesk.sln</SolutionPath>
+    <GlobalAssemblyPath>$(FreshDeskDir)\Dependencies</GlobalAssemblyPath>
+    <TempVersion>1.0.1.0</TempVersion>
+</PropertyGroup>
+
+  <!-- If Debug -->   
+  <PropertyGroup Condition=" '$(DeployTarget1)'=='Development' ">
+    <BuildConfiguration>Debug</BuildConfiguration>
+    <Platform>Any CPU</Platform>
+    <builtdir>bin-De</builtdir>
+  </PropertyGroup>
+
+  <!-- If Release -->
+  <PropertyGroup Condition=" '$(DeployTarget1)'=='PROD' ">
+    <BuildConfiguration>Release</BuildConfiguration>
+    <Platform>Any CPU</Platform>
+    <builtdir>bin-Re</builtdir>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="$(MSBuildProjectDirectory)\Build.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\BuildInstaller.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\Init.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\PostBuild.targets" />
+
+</Project>

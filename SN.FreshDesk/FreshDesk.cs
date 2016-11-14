@@ -51,7 +51,7 @@ namespace SN.FreshDesk
                 }
                 else
                 {
-                    string msg = "";
+                    //string msg = "";
                     HttpStatusCode statusCode = response.StatusCode;
 
                     throw new Exception(string.Format("Response status not 200... TODO: Improved error message.", (int)statusCode));
@@ -312,10 +312,10 @@ namespace SN.FreshDesk
             return response.helpdesk_ticket;
         }
 
-        public async Task<ticket> PickTicket(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<ticket> PickTicket(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<bool> DeleteTicket(int id)
         {
@@ -326,30 +326,30 @@ namespace SN.FreshDesk
             return response;
         }
 
-        public async Task<ticket> RestoreTicket(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<ticket> RestoreTicket(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<ticket> AssignTicket(int id, int user_id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<ticket> AssignTicket(int id, int user_id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<List<ticket_field>> GetTicketFields()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<List<ticket_field>> GetTicketFields()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<note> AddNoteToTicket(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<note> AddNoteToTicket(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<note> AddNoteToTicketWithAttachment(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<note> AddNoteToTicketWithAttachment(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
         #endregion
 
 

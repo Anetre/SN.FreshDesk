@@ -46,7 +46,11 @@ SN.FreshDesk/.vs/SN.FreshDesk/v14/.suo
 
 bin/
 
+packages/**/*.*
+**/obj/Debug/*.*
+**/obj/Release/*.*
 **/bin/Debug/*.*
 **/bin/Release/*.*
+**/bin-Re/*.*
 *.pdb
 *.suo

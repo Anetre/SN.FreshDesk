@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="">
+  <Target Name="PostBuildCopy">
+    
+    <Message Text="
+-----------------------
+Start PostBuildCopy
+-----------------------" />
+    <CallTarget Targets="PostBuildClean" />
+
+
+    <ItemGroup>
+      <UploadNuGetFile Include="$(FreshDeskDir)\upload.bat" />
+    </ItemGroup>
+    
+    <WriteLinesToFile File="@(UploadNuGetFile)" Lines="C:\Projects\IS\Tools\NuGet\NuGet.exe push SN.FreshDesk.$(FreshDeskVersion).nupkg -Source https://integrationsoftware.pkgs.visualstudio.com/DefaultCollection/_packaging/IntegrationManagerInternalFeed/nuget/v3/index.json -ApiKey VSTS
+del SN.FreshDesk.$(FreshDeskVersion).nupkg
+" Overwrite="true" />
+    
+  </Target>
+
+
+  <Target Name="PostBuildClean">
+   
+  </Target>
+
+  <Target Name="PostBuild">
+    <CallTarget Targets="PostBuildCopy" />
+  </Target>
+
+</Project>

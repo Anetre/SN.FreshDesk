@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="" >
+  <!-- If Debug -->
+  <PropertyGroup Condition=" '$(DeployTarget1)'=='Development' ">
+    <AssemblyProduct>IM Libraries Model - DEBUG BUILD</AssemblyProduct>
+    <AssemblyConfiguration>Debug</AssemblyConfiguration>
+  </PropertyGroup>
+ 
+  <!-- If Release -->
+  <PropertyGroup Condition=" '$(DeployTarget1)'=='PROD' ">
+    <AssemblyProduct>IM Libraries Model</AssemblyProduct>
+    <AssemblyConfiguration>Release</AssemblyConfiguration>
+  </PropertyGroup>
+  
+  <Target Name="Init" DependsOnTargets="SetAssemblyVersion">
+
+  </Target>
+  
+  <Target Name="SetAssemblyVersion">
+    <PropertyGroup>
+      <BuildTime>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss"))</BuildTime>
+    </PropertyGroup>
+
+    <Computer>
+      <Output TaskParameter="Name" PropertyName="BuildMachineName" />
+      <Output TaskParameter="OSPlatform" PropertyName="BuildMachineOSPlatform" />
+      <Output TaskParameter="OSVersion" PropertyName="BuildMachineOSVersion" />
+    </Computer>
+    
+    <GitVersion LocalPath="C:\Projects\IS" Short="true">
+      <Output TaskParameter="CommitHash" PropertyName="CommitHash" />
+    </GitVersion>
+
+
+    <CreateProperty Value="$(TempVersion)">
+      <Output PropertyName="FreshDeskVersion" TaskParameter="Value"/>
+    </CreateProperty>
+
+    <Time>
+      <Output TaskParameter="Year" PropertyName="Year" />
+    </Time>
+    
+    <Attrib Files="$(GlobalAssemblyPath)\GlobalAssemblyInfo.cs" ReadOnly="False" />
+    <AssemblyInfo CodeLanguage="CS"
+                  OutputFile="$(GlobalAssemblyPath)\GlobalAssemblyInfo.cs"
+                  GenerateClass="false"
+                  AssemblyCompany=""
+                  AssemblyCopyright="Copyright © $(Year)"
+                  AssemblyProduct="$(AssemblyProduct)"
+                  AssemblyConfiguration="$(AssemblyConfiguration)"
+                  AssemblyTrademark=""
+                  AssemblyCulture=""
+                  AssemblyVersion="$(FreshDeskVersion)"
+                  AssemblyFileVersion="$(FreshDeskVersion)"
+                  AssemblyInformationalVersion="$(FreshDeskVersion)-$(CommitHash), built $(BuildTime) UTC on: $(BuildMachineName), $(BuildMachineOSPlatform) v$(BuildMachineOSVersion)" />
+
+    <Message Text ="----------------------------------------------------------------------------------
+Start building of SN FreshDesk...
+DeployTarget: $(DeployTarget)
+FreshDeskVersion: $(FreshDeskVersion)
+-----------------------------------------------------------------------------------"/>
+  </Target>
+
+  
+</Project>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="" >
+
+  <!-- Projects to Build -->
+  <ItemGroup>
+    <ProjectFiles Include="$(FreshDeskDir)\SN.FreshDesk.sln" />
+  </ItemGroup>
+
+  <Target Name="Compile" DependsOnTargets="SetAssemblyVersion">
+    <MakeDir Directories="$(builtdir)" Condition="!Exists('$(builtdir)')" />
+    <MSBuild Projects="@(ProjectFiles)" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform);OutputPath=$(builtdir);SkipUnchangedFiles=false;FreshDeskVersion=$(FreshDeskVersion)"  />
+  </Target>
+
+  <Target Name="Build" BeforeTargets="Init">
+    <CallTarget Targets="Compile" />
+  </Target>
+
+  <ItemGroup>
+    <CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;$(FreshDeskDir)\&quot;,&quot;bin-Re&quot;, SearchOption.AllDirectories))" />
+    <CleanFolders Include="$([System.IO.Directory]::GetDirectories(&quot;$(FreshDeskDir)\&quot;,&quot;bin-De&quot;, SearchOption.AllDirectories))" />
+  </ItemGroup>
+
+  <Target Name="Clean" DependsOnTargets="SetAssemblyVersion">
+    <Message Text="Folders to clean: @(CleanFolders, ' , ')" />
+    <RemoveDir Directories="@(CleanFolders)" />
+  </Target>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+</Project>

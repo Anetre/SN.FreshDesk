@@ -45,11 +45,11 @@ namespace SN.FreshDesk.Tests
             //await fd.CreateForum(forum);
         }
 
-        [TestMethod]
-        public async Task DeleteForum()
-        {
-            //await fd.DeleteForum(1000228599);
-        }
+        //[TestMethod]
+        //public async Task DeleteForum()
+        //{
+        //    //await fd.DeleteForum(1000228599);
+        //}
 
         [TestMethod]
         public async Task GetForumCategories()

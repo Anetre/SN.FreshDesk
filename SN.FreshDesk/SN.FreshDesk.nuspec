@@ -1,18 +1,22 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
-    <version>1.0.0.7</version>
-    <title>$title$</title>
-    <authors>Robert Mayer,MarkMilfordMe</authors>
+    <id>SN.FreshDesk</id>
+    <version>$version$</version>
+    <title>SN.FreshDesk</title>
+    <authors>Robert Mayer,MarkMilfordMe,Anetre</authors>
     <owners>Robert Mayer</owners>
     <licenseUrl>https://www.mozilla.org/en-US/MPL/2.0/</licenseUrl>
     <projectUrl>https://github.com/syron/SN.FreshDesk</projectUrl>
     <iconUrl>http://freshdesk.com/files/1813/9885/7672/favicon.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Added support for retrieving customers.</releaseNotes>
+    <description>FreshDesk for .NET</description>
+    <releaseNotes>Update to include correct DLL:s</releaseNotes>
     <copyright>Copyright 2016 Robert Mayer</copyright>
     <tags>FreshDesk</tags>
   </metadata>
+  <files>
+    <file src="..\SN.FreshDesk.Models\bin-Re\SN.FreshDesk.Models.dll" target="lib\net45" />
+    <file src="bin-Re\SN.FreshDesk.dll" target="lib\net45" />
+  </files>
 </package>

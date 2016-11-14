@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{C8F7F7B0-6243-497C-9FE2-F9C70990E5FD}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,6 +22,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{12B99287-AD5E-40D0-A096-75A3EA3B9E42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.FreshDesk.Connector", "SN.FreshDesk.Connector\SN.FreshDesk.Connector.csproj", "{E07A12FD-EB59-46ED-8046-0BB631262475}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{A11DD8C2-470C-4759-BC4B-BC59094954D6}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\GlobalAssemblyInfo.cs = Dependencies\GlobalAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{F71A2650-5805-4390-8B5B-0819F9726A76}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Build.proj = Build\Build.proj
+		Build\Build.targets = Build\Build.targets
+		Build\Init.targets = Build\Init.targets
+		Build\PostBuild.targets = Build\PostBuild.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
